@@ -1,5 +1,11 @@
 # ConnectionView
 
+### connected
+![alt text](https://github.com/DjamshidDjurayev/ConnectionView/blob/master/connected.jpeg)
+
+### disconnected
+![alt text](https://github.com/DjamshidDjurayev/ConnectionView/blob/master/disconnected.jpeg)
+
 ```kotlin
 val connectionView = ConnectionView(this).apply {
             attachActivity(this@MainActivity)
