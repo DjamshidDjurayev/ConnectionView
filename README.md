@@ -1,17 +1,22 @@
 # ConnectionView
 
 ```kotlin
-connectionView = ConnectionView(this).apply {
-        attachActivity(this@WelcomeScreenActivity)
-        setIsAnimated(true)
-        setConnectedText(getString(R.string.connected))
-        setDisconnectedText(getString(R.string.disconnected))
-        setTextColor(ContextCompat.getColor(this@WelcomeScreenActivity, R.color.white))
-        makeTransparent()
-      }
-```
+val connectionView = ConnectionView(this).apply {
+            attachActivity(this@MainActivity)
+            setIsAnimated(true)
+            setConnectedText(getString(R.string.connected))
+            setDisconnectedText(getString(R.string.disconnected))
+            setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
+            makeTransparent()
+        }
 
-```java
-connectionView.show(true, 3000)
-connectionView.hide()
+        Handler().postDelayed(Runnable {
+            connectionView.setIsConnected(true)
+            connectionView.show(true, 4000)
+        }, 2000)
+
+        Handler().postDelayed(Runnable {
+            connectionView.setIsConnected(false)
+            connectionView.show(true, 4000)
+        }, 8000)
 ```
