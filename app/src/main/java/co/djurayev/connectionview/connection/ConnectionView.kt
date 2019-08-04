@@ -41,6 +41,11 @@ class ConnectionView : RelativeLayout {
     val decor = activity!!.get()?.window?.decorView as ViewGroup
     val rootView = activity!!.get()?.window?.decorView?.rootView
     rootView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE
+
+    rootView?.setOnSystemUiVisibilityChangeListener { _ ->
+      this.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE
+    }
+
     decor.addView(this)
   }
 
@@ -172,6 +177,15 @@ class ConnectionView : RelativeLayout {
 
   fun setIsAnimated(isAnimated: Boolean) {
     this.animated = isAnimated
+  }
+
+  override fun onDetachedFromWindow() {
+    if (autoHideRunnable != null) {
+      connectionHandler?.removeCallbacks(autoHideRunnable)
+      autoHideRunnable = null
+    }
+    activity?.get()?.window?.decorView?.setOnSystemUiVisibilityChangeListener(null)
+    super.onDetachedFromWindow()
   }
 
   companion object {
